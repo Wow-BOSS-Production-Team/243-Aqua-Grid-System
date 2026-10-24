@@ -4,49 +4,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#173845">
-  <title>AquaGrid Operator</title>
-  <meta name="description" content="Mockup aplikasi operator AquaGrid C50 — jaringan generator air dari udara bertenaga surya. Data simulasi.">
+  <title>AquaGrid Dasbor Operator</title>
+  <meta name="description" content="Mockup dasbor operator AquaGrid C50 — jaringan generator air dari udara bertenaga surya. Data simulasi.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
-  <div class="stage">
-    <aside class="side-info">
-      <div class="brand-lg">
-        <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#logo"/></svg>
-        <div><strong>AquaGrid</strong><span>Mockup aplikasi operator</span></div>
-      </div>
-      <p>Jaringan generator air dari udara bertenaga surya untuk wilayah krisis air. Aplikasi ini dipakai operator komunitas untuk memantau AquaGrid C50, mencatat distribusi, menerima pembayaran, dan mengelola servis modul.</p>
-      <ul class="side-list">
-        <li><b>Prinsip utama:</b> volume produksi dipisahkan dari status keamanan air.</li>
-        <li><b>Offline-first:</b> data tersimpan lokal saat jaringan putus, lalu dikirim ulang.</li>
-        <li><b>Sirkular:</b> kartrid lama disegel dan dicatat untuk pengembalian.</li>
-      </ul>
-      <p class="side-note">Semua angka adalah <b>data simulasi</b>, bukan hasil pengukuran prototipe. Tim SHANI · BPC UI Innovation War 2026.</p>
-    </aside>
-
-    <div class="phone">
-      <div class="phone-notch" aria-hidden="true"></div>
-      <div id="app" class="app"></div>
-    </div>
-  </div>
+  <div id="app"></div>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <div id="modal-root"></div>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
       <symbol id="logo" viewBox="0 0 32 32">
-        <rect x="1" y="1" width="30" height="30" rx="9" fill="#173845"/>
-        <path d="M16 6c-3.6 4.6-6.5 8.4-6.5 12a6.5 6.5 0 0 0 13 0c0-3.6-2.9-7.4-6.5-12z" fill="#3cc2b0"/>
-        <path d="M11.5 19.5h9M13 22.5h6M16 15v10" stroke="#173845" stroke-width="1.4" stroke-linecap="round"/>
+        <rect x="1" y="1" width="30" height="30" rx="8" fill="#3cc2b0"/>
+        <path d="M16 6.5c-3.5 4.4-6.2 8-6.2 11.4a6.2 6.2 0 0 0 12.4 0c0-3.4-2.7-7-6.2-11.4z" fill="#173845"/>
+        <path d="M12.4 19h7.2M13.6 21.8h4.8M16 15.5v8.6" stroke="#3cc2b0" stroke-width="1.3" stroke-linecap="round"/>
       </symbol>
       <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
       <symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></g></symbol>
       <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3c-3.5 4.5-6 8-6 11a6 6 0 0 0 12 0c0-3-2.5-6.5-6-11z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
       <symbol id="i-wallet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M16 13h2M3 9h18M6 6l9-3 2 3"/></g></symbol>
-      <symbol id="i-more" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></g></symbol>
-      <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
       <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
       <symbol id="i-wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/></g></symbol>
       <symbol id="i-wifi-off" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 3l18 18M8.5 16a5 5 0 0 1 7 0M5 12.5a10 10 0 0 1 4-2.4M2 9a15 15 0 0 1 5.5-3.4M14 6.1A15 15 0 0 1 22 9M17 10.6a10 10 0 0 1 2 1.9"/></g></symbol>
       <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3M7 15h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></symbol>
@@ -56,8 +38,14 @@
       <symbol id="i-logout" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4M10 17l5-5-5-5M15 12H3"/></g></symbol>
       <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></g></symbol>
       <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
       <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></symbol>
-      <symbol id="i-recycle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19H4.5a1.5 1.5 0 0 1-1.3-2.3L5.5 13M12 4.5l1.3-2.2M17 19h2.5a1.5 1.5 0 0 0 1.3-2.3L16 9M9 5.5l1.7-2.8a1.5 1.5 0 0 1 2.6 0L16 7"/><path d="M14 19H7l2-2.5M7 19l2 2.5M16 9l.7 3.2M16 9l-3.1.9"/></g></symbol>
+      <symbol id="i-recycle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8.5"/><path d="M20 4v4.5h-4.5"/><path d="M20 12a8 8 0 0 1-13.7 5.6L4 15.5"/><path d="M4 20v-4.5h4.5"/></g></symbol>
+      <symbol id="i-print" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M7 8V3h10v5"/><rect x="3" y="8" width="18" height="9" rx="2"/><path d="M7 14h10v7H7z"/></g></symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></g></symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></g></symbol>
+      <symbol id="i-thermo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 14.5V5a2 2 0 0 1 4 0v9.5a4 4 0 1 1-4 0z"/><path d="M12 9v7"/></g></symbol>
     </defs>
   </svg>
 
